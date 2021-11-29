@@ -44,10 +44,11 @@ module Graph
 end 
     
 module Graph
-  attr_reader :headers
-
+  
   class Client
     BASE_URL = 'https://graph.microsoft.com/v1.0'
+
+    attr_reader :headers
 
     def initialize(token=nil)
       if token.nil?
@@ -75,5 +76,6 @@ module Graph
     
     def delete(path)
       HTTP[@headers].delete(BASE_URL + path)
+    end
   end
 end
