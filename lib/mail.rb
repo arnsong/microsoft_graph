@@ -25,11 +25,11 @@ module Graph
       @client = client
     end
 
-    def folder(folder='inbox', params={})
+    def folder(folder = 'inbox', params = {})
       @client.get("/me/mailFolders/#{folder}", params)
     end
 
-    def retrieve_messages(folder='Inbox', params={})
+    def retrieve_messages(folder = 'Inbox', params = {})
       @client.get("/me/mailFolders('#{folder}')/messages", params)
     end
 
@@ -41,16 +41,15 @@ module Graph
       @client.delete("/me/messages/#{message_id}")
     end
   end
-end 
-    
+end
+
 module Graph
-  
   class Client
     BASE_URL = 'https://graph.microsoft.com/v1.0'
 
     attr_reader :headers
 
-    def initialize(token=nil)
+    def initialize(token = nil)
       if token.nil?
         raise 'GRAPH_TOKEN environment variable is not defined' unless ENV['GRAPH_TOKEN']
 
@@ -66,14 +65,14 @@ module Graph
       @headers[:Accept] = 'application/json'
     end
 
-    def get(path, params={})
+    def get(path, params = {})
       HTTP[@headers].get(BASE_URL + path, params: params)
     end
-    
-    def post(path, body={})
+
+    def post(path, body = {})
       HTTP[@headers].post(BASE_URL + path, json: body)
     end
-    
+
     def delete(path)
       HTTP[@headers].delete(BASE_URL + path)
     end
