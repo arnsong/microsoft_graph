@@ -17,7 +17,6 @@
 
 require 'http'
 require 'json'
-require 'jwt'
 
 module Graph
   class Mail
@@ -66,15 +65,15 @@ module Graph
     end
 
     def get(path, params = {})
-      HTTP[@headers].get(BASE_URL + path, params: params)
+      HTTP[@headers].get("#{BASE_URL}#{path}", params: params)
     end
 
     def post(path, body = {})
-      HTTP[@headers].post(BASE_URL + path, json: body)
+      HTTP[@headers].post("#{BASE_URL}#{path}", json: body)
     end
 
     def delete(path)
-      HTTP[@headers].delete(BASE_URL + path)
+      HTTP[@headers].delete("#{BASE_URL}#{path}")
     end
   end
 end
